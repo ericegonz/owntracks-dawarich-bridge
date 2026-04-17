@@ -105,6 +105,18 @@ networks:
 
 You can also keep the included `.env.example`, copy it to `.env`, and use the repository's bundled `docker-compose.yml` after changing `image` to the tag you want to run.
 
+### Dawarich Host Allowlist Gotcha
+
+If `DAWARICH_URL` points at an internal Docker hostname such as `http://dawarich_app:3000`, Dawarich must allow that hostname in its `APPLICATION_HOSTS` setting.
+
+For example, in Dawarich's `.env`:
+
+```dotenv
+APPLICATION_HOSTS=localhost,::1,127.0.0.1,your-domain.com,dawarich_app
+```
+
+If the hostname used by the bridge is missing from `APPLICATION_HOSTS`, Dawarich can reject the request even when the containers can reach each other on the Docker network.
+
 ## Local Development
 
 Run the script directly:
