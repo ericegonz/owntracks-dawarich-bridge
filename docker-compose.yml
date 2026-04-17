@@ -1,0 +1,18 @@
+services:
+  owntracks-dawarich-bridge:
+    image: ericegonz/owntracks-dawarich-bridge:local
+    build: .
+    container_name: owntracks-dawarich-bridge
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      MQTT_HOST: ${MQTT_HOST:-mosquitto}
+      MQTT_PORT: ${MQTT_PORT:-1883}
+      MQTT_USERNAME: ${MQTT_USERNAME:-recorder}
+      MQTT_PASSWORD: ${MQTT_PASSWORD}
+      MQTT_TOPIC: ${MQTT_TOPIC:-owntracks/#}
+      DAWARICH_URL: ${DAWARICH_URL}
+      DAWARICH_API_KEY: ${DAWARICH_API_KEY}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      REQUEST_TIMEOUT: ${REQUEST_TIMEOUT:-10}
