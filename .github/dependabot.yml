@@ -1,0 +1,21 @@
+version: 2
+updates:
+  - package-ecosystem: pip
+    directory: "/"
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+      - security
+    commit-message:
+      prefix: build
+
+  - package-ecosystem: docker
+    directory: "/"
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+      - security
+    commit-message:
+      prefix: build
